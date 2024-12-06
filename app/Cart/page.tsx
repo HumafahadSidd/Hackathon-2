@@ -1,12 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
-import Button from '../components/button'
 
-export default function CartItems() {
+
+
+export default function Cart() {
   return (
-    <div className='h-screen bg-white '>
+    <div className='h-screen bg-white  mt-2'>
       <button className='no-border px-2 py-2'>Home/Cart</button>
-    <table className='w-[1000px] h-[800px] ml-[500px]'>
+    <table className='w-[1000px] h-[800px] ml-[500px] text-2xl'>
         <tr className=''> 
         <th>Product</th>
         <th>Price</th>
@@ -40,46 +41,46 @@ export default function CartItems() {
         </tr>
          <tr>
                 <td>
-                  <button className='border px-6 py-6'>Coupon Code</button>
+                  <button className='border px-6 py-3 '>Coupon Code</button>
                   </td>
                 <td>
-                  <button className='border px-6 py-6 bg-red-400'>Apply Coupon</button>
-                </td>
+                  <button className='border px-10 py-3 rounded-md bg-red-400'>Apply Coupon</button>
+              </td>
                 <tr>
                     <td className='border px-4 py-8'>
-                  <table>
+                <table className='px-10 py-6'>
                     <tr>
                       <th>Cart Total</th>
                     </tr>
-                    <tr>
-                      <td>Sub Total</td>
-                      ____________________
+                    <tr className='w-5'>
+                      <td className='w-5'>Sub Total</td>
+                      <td></td>
                       <td>$1170</td>
-                      ____________________
-                    </tr>
+                   </tr>
                     <tr>
-                      <td>Shipping</td>
-                     ____________________
-                     <td>$1170</td>
+                      <td className='w-5'>Shipping</td>
+                      <td></td>
+                      <td className='w-5'>$1170</td>
 
                     </tr>
-                    <tr>
-                      <td>Total</td>
-                      ____________________
-                      <td>$1170</td>
-                     
-                    </tr>
-                    <tr>
+                    <tr className='h-2'>
+                      <td className='w-5'>Total</td>
+                      <td></td>
+                     <td className='w-5'>$1170</td>
+                     </tr>
+                    <tr className='h-2'>
                       
-                      <td>Shipping</td>
+                      <td className='w-5'>Shipping</td>
+                      <td></td>
                       <td>Free</td>
                     </tr>
-                    <tr>
-                      <td>Total</td>
-                      <td>$1300</td>
+                    <tr className='h-2'>
+                      <td className='w-5'>Total</td>
+                      <td></td>
+                      <td className='w-5'>$1300</td>
                     </tr>
-                  </table>
-                </td>
+                  </table> 
+                </td> 
               </tr>
               </tr>
         <tr></tr>
