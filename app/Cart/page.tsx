@@ -1,91 +1,116 @@
-import React from 'react'
-import Image from 'next/image'
+'use client'
+import React, { useState } from 'react';
 
+const CartPage: React.FC = () => {
+  const [quantities, setQuantities] = useState({ lcdMonitor: 1, ps4Gamepad: 7 });
+  const [coupon, setCoupon] = useState('');
+  const [subtotal, setSubtotal] = useState(1300);
+  const shipping = 199;
+  const total = subtotal + shipping;
 
+  const handleQuantityChange = (product: string, quantity: number) => {
+    setQuantities({ ...quantities, [product]: quantity });
+    updateSubtotal();
+  };
 
-export default function Cart() {
+  const updateSubtotal = () => {
+    const newSubtotal = quantities.lcdMonitor * 600 + quantities.ps4Gamepad * 100;
+    setSubtotal(newSubtotal);
+  };
+
+  const handleCouponChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCoupon(e.target.value);
+  };
+
+  const applyCoupon = () => {
+    // Apply coupon logic here
+  };
+
   return (
-    <div className='h-screen bg-white  mt-2'>
-      <button className='no-border px-2 py-2'>Home/Cart</button>
-    <table className='w-[1000px] h-[800px] ml-[500px] text-2xl'>
-        <tr className=''> 
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Sub Total</th>
-        </tr>
-        <tr className='h-[100px] w-[800px] border'>
-            <td  className='text-center'>
-              <Image src="/Cart With Flat Discount (2).png" alt="image5" height="100" width="100" /><p>LCD Monitor</p></td>
-            <td  className='text-center'>$650</td>
-            <td className='text-center border p-1'><input type="number" name="" id="" />1</td>
-            <td  className='text-center'>$650</td>
-        </tr>
-
-        <tr className='h-[100px] w-[800px] border'>
-            <td  className='text-center'>
-              <Image src="/Cart With Flat Discount.png" alt="image5" height="100" width="100"  /><p>HI GamePAd</p></td>
-            <td  className='text-center'>$650</td>
-            <td  className='text-center border'>
-              <input type="number"  />1</td>
-            <td  className='text-center'>$650</td>
-      
-        </tr>
-        <tr className='flex justify-between space-x-20'> 
-                 <td>
-            <button className='px-4 py-4 border'>Return to shop</button>
-        </td>
-        <td>
-          <button className='px-4 py-4 border '>Update Cart</button>
-        </td>
-        </tr>
-         <tr>
-                <td>
-                  <button className='border px-6 py-3 '>Coupon Code</button>
-                  </td>
-                <td>
-                  <button className='border px-10 py-3 rounded-md bg-red-400'>Apply Coupon</button>
+    <div className="cart-page">
+            <main>
+        <h2>Cart</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LCD Monitor</td>
+              <td>$600</td>
+              <td>
+                <input
+                  type="number"
+                  value={quantities.lcdMonitor}
+                  onChange={(e) => handleQuantityChange('lcdMonitor', parseInt(e.target.value))}
+                />
               </td>
-                <tr>
-                    <td className='border px-4 py-8'>
-                <table className='px-10 py-6'>
-                    <tr>
-                      <th>Cart Total</th>
-                    </tr>
-                    <tr className='w-5'>
-                      <td className='w-5'>Sub Total</td>
-                      <td></td>
-                      <td>$1170</td>
-                   </tr>
-                    <tr>
-                      <td className='w-5'>Shipping</td>
-                      <td></td>
-                      <td className='w-5'>$1170</td>
-
-                    </tr>
-                    <tr className='h-2'>
-                      <td className='w-5'>Total</td>
-                      <td></td>
-                     <td className='w-5'>$1170</td>
-                     </tr>
-                    <tr className='h-2'>
-                      
-                      <td className='w-5'>Shipping</td>
-                      <td></td>
-                      <td>Free</td>
-                    </tr>
-                    <tr className='h-2'>
-                      <td className='w-5'>Total</td>
-                      <td></td>
-                      <td className='w-5'>$1300</td>
-                    </tr>
-                  </table> 
-                </td> 
-              </tr>
-              </tr>
-        <tr></tr>
+              <td>${quantities.lcdMonitor * 600}</td>
+            </tr>
+            <tr>
+              <td>PS4 Gamepad</td>
+              <td>$100</td>
+              <td>
+                <input
+                  type="number"
+                  value={quantities.ps4Gamepad}
+                  onChange={(e) => handleQuantityChange('ps4Gamepad', parseInt(e.target.value))}
+                />
+              </td>
+              <td>${quantities.ps4Gamepad * 100}</td>
+            </tr>
+          </tbody>
         </table>
+        <div className="coupon-section">
+          <input
+            type="text"
+            value={coupon}
+            onChange={handleCouponChange}
+            placeholder="Coupon Code"
+          />
+          <button onClick={applyCoupon}>Apply Coupon</button>
+        </div>
+        <div className="cart-total">
+          <p>Subtotal: ${subtotal}</p>
+          <p>Shipping: ${shipping}</p>
+          <p>Total: ${total}</p>
+          <button>Proceed to Checkout</button>
+        </div>
+      </main>
+      <footer>
+        <div className="subscribe">
+          <h3>Subscribe</h3>
+          <p>Get 10% off your first order</p>
+          <input type="email" placeholder="Enter your email" />
+          <button>Subscribe</button>
+        </div>
+        <div className="support">
+          <h3>Support</h3>
+          <p>Call us: +123456789</p>
+          <p>Email: support@example.com</p>
+        </div>
+        <div className="account">
+          <h3>Account</h3>
+          <a href="/login">My Account</a>
+          <a href="/register">Register</a>
+          <a href="/wishlist">Wishlist</a>
+          <a href="/shop">Shop</a>
+        </div>
+        <div className="quick-links">
+          <h3>Quick Links</h3>
+          <a href="/">Home</a>
+          <a href="/contact">Contact</a>
+          <a href="/about">About</a>
+          <a href="/signup">Sign Up</a>
+        </div>
+      </footer>
     </div>
-    
-  )
-}
+  );
+};
+
+export default CartPage;
